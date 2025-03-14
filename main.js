@@ -39,7 +39,7 @@ function aboutWindow() {
   // Validação (Se existir a janela principal)
   if (mainWindow) {
     about = new BrowserWindow({
-      width: 320,
+      width: 360,
       height: 280,
       autoHideMenuBar: true,
       resizable: false,
@@ -52,6 +52,29 @@ function aboutWindow() {
   }
 
   about.loadFile('./src/views/sobre.html')
+}
+
+// Criar a função para cadastro do cliente "Janela Cadastro"
+function cadastroWindow() {
+  nativeTheme.themeSource = 'light'
+  // Obter a janela principal, comando abaixo sabera qual é a janela principal
+  const mainWindow = BrowserWindow.getFocusedWindow()
+  // Validação (Se existir a janela principal)
+  if (mainWindow) {
+    about = new BrowserWindow({
+      width: 700,
+      height: 400,
+      autoHideMenuBar: true,
+      resizable: false,
+      minimizable: false,
+      // Estabelecer uma relação hierárquica entre janelas
+      parent: mainWindow,
+      // Criar uma janela modal (só retorna a principal quando encerrada)
+      modal: true
+    })
+  }
+
+  about.loadFile('./src/views/cadastro.html')
 }
 
 // inicialização da aplicação ( ".then" significa assincronismo)
@@ -81,10 +104,12 @@ app.commandLine.appendSwitch('log-level', '3')
 // Quando abre e fecha essas chaves [] significa vetor, Label (Escrever no menu), Ctrl+N (Tecla atalho), app.quit (Finaliza o aplicativo)
 const template = [
   {
-    label: 'Notas',
+    label: 'Cadastro',
     submenu: [
       {
-        label: 'Criar nota',
+        label: 'Criar Cadastro',
+        label: 'criar cadastro',
+        click: () => cadastroWindow(),
         accelerator: 'Ctrl+N',
       },
       {
@@ -93,6 +118,7 @@ const template = [
       {
         label: 'Sair',
         accelerator: 'Alt+F4',
+        
         click: () => app.quit()
       }
     ]
@@ -134,7 +160,7 @@ const template = [
       },
       {
         label: 'Sobre',
-        click: () => aboutWindow()
+        click: () => aboutWindow(),
       }
     ]
   }
