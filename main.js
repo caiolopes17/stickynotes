@@ -116,6 +116,10 @@ const template = [
         type: 'separator'
       },
       {
+        label: 'recarregar',
+        role: 'reload'
+      },
+      {
         label: 'DevTools',
         role: 'toggleDevTools'
       }
