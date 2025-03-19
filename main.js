@@ -8,6 +8,9 @@ console.log("Electron - Processo principal")
 // Shell (Acessar links externos no navegador padrão (Ex: GitHub))
 const { app, BrowserWindow, nativeTheme, Menu, shell } = require('electron/main')
 
+// Ativação do preload.js(importação do path "Caminho até chegar no preload.js")
+const path = require ('node:path')
+
 // Janela Principal
 let win
 const createWindow = () => {
