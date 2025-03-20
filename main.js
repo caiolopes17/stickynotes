@@ -15,6 +15,9 @@ const path = require('node:path')
 // Importação dos métodos conectar e desconectar 'Módulo de conexão'
 const { conectar, desconectar } = require('./database.js')
 
+// Ativação do preload.js(importação do path "Caminho até chegar no preload.js")
+const path = require ('node:path')
+
 // Janela Principal
 let win
 const createWindow = () => {
@@ -49,8 +52,13 @@ function aboutWindow() {
   // Validação (Se existir a janela principal)
   if (mainWindow) {
     about = new BrowserWindow({
+<<<<<<< HEAD
       width: 300,
       height: 200,
+=======
+      width: 360,
+      height: 280,
+>>>>>>> 0d9c3ab65224ea09cc1065b8e57b3996c4930294
       autoHideMenuBar: true,
       resizable: false,
       minimizable: false,
@@ -62,6 +70,29 @@ function aboutWindow() {
   }
 
   about.loadFile('./src/views/sobre.html')
+}
+
+// Criar a função para cadastro do cliente "Janela Cadastro"
+function cadastroWindow() {
+  nativeTheme.themeSource = 'light'
+  // Obter a janela principal, comando abaixo sabera qual é a janela principal
+  const mainWindow = BrowserWindow.getFocusedWindow()
+  // Validação (Se existir a janela principal)
+  if (mainWindow) {
+    about = new BrowserWindow({
+      width: 900,
+      height: 400,
+      autoHideMenuBar: true,
+      resizable: false,
+      minimizable: false,
+      // Estabelecer uma relação hierárquica entre janelas
+      parent: mainWindow,
+      // Criar uma janela modal (só retorna a principal quando encerrada)
+      modal: true
+    })
+  }
+
+  about.loadFile('./src/views/cadastro.html')
 }
 
 // inicialização da aplicação ( ".then" significa assincronismo)
@@ -115,10 +146,12 @@ app.commandLine.appendSwitch('log-level', '3')
 // Quando abre e fecha essas chaves [] significa vetor, Label (Escrever no menu), Ctrl+N (Tecla atalho), app.quit (Finaliza o aplicativo)
 const template = [
   {
-    label: 'Notas',
+    label: 'Cadastro',
     submenu: [
       {
-        label: 'Criar nota',
+        label: 'Criar Cadastro',
+        label: 'criar cadastro',
+        click: () => cadastroWindow(),
         accelerator: 'Ctrl+N',
       },
       {
@@ -127,6 +160,7 @@ const template = [
       {
         label: 'Sair',
         accelerator: 'Alt+F4',
+        
         click: () => app.quit()
       }
     ]
@@ -168,7 +202,7 @@ const template = [
       },
       {
         label: 'Sobre',
-        click: () => aboutWindow()
+        click: () => aboutWindow(),
       }
     ]
   }
