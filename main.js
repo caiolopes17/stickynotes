@@ -49,8 +49,8 @@ function aboutWindow() {
   // Validação (Se existir a janela principal)
   if (mainWindow) {
     about = new BrowserWindow({
-      width: 320,
-      height: 280,
+      width: 300,
+      height: 200,
       autoHideMenuBar: true,
       resizable: false,
       minimizable: false,
@@ -74,14 +74,17 @@ app.whenReady().then(() => {
   // ipcMain.on (receber mensagem)
   // db-connect (rótulo da mensagem)
   ipcMain.on('db-connect', async (event) => {
-    // A linha abaixo estabelece a conexão com banco de dados
-    await conectar()
-    // enviar ao renderizador uma mensagem para trocar a imagem do icone do status do banco de dados (criar um delay de 0.5 ou 1s para sincronização com a nuvem)
-    setTimeout(() => {
-      //enviar ao renderizador a mensagem "conectado"
-      // db-status (IPC - comunicação entre processos - preload.js)
-      event.reply('db-status', "conectado")
-    }, 500) //500ms = 0.5  seg
+    // A linha abaixo estabelece a conexão com banco de dados e verifica se foi conectado com sucesso (return true)
+    const conectado = await conectar()
+    if (conectado) {
+      // enviar ao renderizador uma mensagem para trocar a imagem do icone do status do banco de dados (criar um delay de 0.5 ou 1s para sincronização com a nuvem)
+      setTimeout(() => {
+        //enviar ao renderizador a mensagem "conectado"
+        // db-status (IPC - comunicação entre processos - preload.js)
+        event.reply('db-status', "conectado")
+      }, 500) //500ms = 0.5  seg
+    }
+
   })
 
 
