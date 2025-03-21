@@ -21,11 +21,7 @@
     "electron": "^34.3.0"
   },
   "dependencies": {
-<<<<<<< HEAD
     "mongoose": "^8.12.1",
     "moongose": "^1.0.0"
-=======
-    "mongoose": "^8.12.1"
->>>>>>> 0d9c3ab65224ea09cc1065b8e57b3996c4930294
   }
 }

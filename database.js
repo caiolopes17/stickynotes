@@ -4,7 +4,7 @@
  */
 
 // importação do mongoose
-// Não esquecer de instalar mongoose
+// Não esquecer de instalar o módulo (npm i mongoose)
 const mongoose = require('mongoose')
 
 // configuração do banco de dados
@@ -25,17 +25,10 @@ const conectar = async () => {
             await mongoose.connect(url) //conectar
             conectado = true //setar a variável
             console.log("MongoDB conectado")
-            return true
+            return true //verificação para o main
         } catch (error) {
-            //tratamento de exceções especificas
-            if (error.code = error) {
-                console.log(`Erro: O CPF ${cpfCli} já está cadastrado `)
-            } else {
-                console.log(error)
-                return false
-
-            }
-
+            console.log(error)
+            return false           
         }
     }
 }
@@ -49,10 +42,10 @@ const desconectar = async () => {
             await mongoose.disconnect(url) //desconectar
             conectado = false //setar a variável
             console.log("MongoDB desconectado")
-            return false
+            return true
         } catch (error) {
             console.log(error)
-            return true
+            return false
         }
     }
 }
